@@ -1,18 +1,9 @@
-<template>
-  <MainLayout>
-    <div class="flex flex-col gap-4 p-6">
-      <q-spinner-dots v-if="questionsStore.loading" color="primary" size="50px" />
-      <QuestionComponent v-else :questions="questions" />
-    </div>
-  </MainLayout>
-</template>
-
 <script setup lang="ts">
 import MainLayout from 'src/layouts/MainLayout.vue';
 import { useQuestionStore } from '../stores/useQuestionStore';
 import { computed, onMounted } from 'vue';
 import { QSpinnerDots } from 'quasar';
-import QuestionComponent from 'src/components/QuestionComponent.vue';
+import QuestionComponent from '../components/QuestionComponent.vue';
 
 const questionsStore = useQuestionStore();
 
@@ -26,3 +17,12 @@ onMounted(async () => {
   }
 });
 </script>
+
+<template>
+  <MainLayout>
+    <div class="flex flex-col gap-4 p-6">
+      <q-spinner-dots v-if="questionsStore.loading" color="primary" size="50px" />
+      <QuestionComponent v-else :questions="questions" />
+    </div>
+  </MainLayout>
+</template>

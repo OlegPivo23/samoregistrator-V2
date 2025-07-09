@@ -1,19 +1,21 @@
 <script setup lang="ts">
 import { ref, defineAsyncComponent } from 'vue';
-import TabMenu from 'src/components/tabs/TabMenu.vue';
 import MainLayout from 'src/layouts/MainLayout.vue';
 import { QSpinnerDots } from 'quasar';
+import TabsComponent from 'src/components/tabs/TabsComponent.vue';
 
-const activeTab = ref('profile');
+type Tab = 'profile' | 'contact';
 
-const ProfileForm = defineAsyncComponent({
-  loader: () => import('src/components/forms/ProfileForm.vue'),
+const activeTab = ref<Tab>('profile');
+
+const ProfileFormComponent = defineAsyncComponent({
+  loader: () => import('src/components/forms/ProfileFormComponent.vue'),
   loadingComponent: () => '<div>Loading profile...</div>',
   delay: 200,
 });
 
-const ContactForm = defineAsyncComponent({
-  loader: () => import('src/components/forms/ContactForm.vue'),
+const ContactFormComponent = defineAsyncComponent({
+  loader: () => import('src/components/forms/ContactFormComponent.vue'),
   loadingComponent: () => '<div>Loading contacts...</div>',
   delay: 200,
 });
@@ -26,10 +28,11 @@ const ContactForm = defineAsyncComponent({
         <template #default>
           <div class="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
             <h2 class="text-2xl font-bold text-gray-700 text-center mb-6">Личный кабинет</h2>
-            <TabMenu v-model:activeTab="activeTab" />
-
+            <TabsComponent v-model:activeTab="activeTab" />
             <KeepAlive>
-              <component :is="activeTab === 'profile' ? ProfileForm : ContactForm" />
+              <component
+                :is="activeTab === 'profile' ? ProfileFormComponent : ContactFormComponent"
+              />
             </KeepAlive>
           </div>
         </template>
