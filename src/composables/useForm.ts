@@ -3,6 +3,7 @@
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { formConfigurations } from 'src/configs/formConfig';
+import { useQuasar } from 'quasar';
 
 // Типы для данных формы
 export interface IAuthInterface {
@@ -61,6 +62,7 @@ export interface FormConfig {
 
 export const useForm = (initialForm: FormType = 'login') => {
   const router = useRouter();
+  const $q = useQuasar();
 
   const activeForm = ref<FormType>(initialForm);
   const formFields = ref<IAuthInterface>({
@@ -163,13 +165,25 @@ export const useForm = (initialForm: FormType = 'login') => {
     }
 
     if (activeForm.value === 'login') {
-      alert('Вы вошли в систему!');
+      $q.notify({
+        message: 'Вы удачно вошли в систему!',
+        type: 'positive',
+        position: 'bottom-right',
+      });
       await router.push('/cabinet');
     } else if (activeForm.value === 'register') {
-      alert('Вы зарегистрировались!');
+      $q.notify({
+        message: 'Вы успешно зарегестрировались!',
+        type: 'positive',
+        position: 'bottom-right',
+      });
       await router.push('/cabinet');
     } else if (activeForm.value === 'forgot') {
-      alert('Инструкция по восстановлению пароля отправлена на ваш email!');
+      $q.notify({
+        message: 'Инструкция по восстановлению пароля отправлена на ваш email!',
+        type: 'info',
+        position: 'bottom-right',
+      });
     }
   };
 

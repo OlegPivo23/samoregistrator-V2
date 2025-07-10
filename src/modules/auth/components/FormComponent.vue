@@ -8,9 +8,9 @@ const {
   formTitle,
   submitButtonLabel,
   isValid,
+  touched,
   handleSubmit,
   switchForm,
-  touched,
   handleBlur,
 } = useForm();
 </script>
@@ -27,6 +27,7 @@ const {
           <label :for="field.model" class="block text-sm font-medium text-gray-700 mb-1">
             {{ field.label }}
           </label>
+
           <q-input
             v-model="formFields[field.model]"
             :type="field.type"

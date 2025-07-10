@@ -15,7 +15,7 @@ export const formConfigurations: Record<FormType, FormConfig> = {
         label: 'Пароль',
         type: 'password',
         model: 'password',
-        error: 'nameError',
+        error: 'passwordError',
       },
     ],
     buttons: [
@@ -42,13 +42,13 @@ export const formConfigurations: Record<FormType, FormConfig> = {
         label: 'Пароль',
         type: 'password',
         model: 'password',
-        error: 'nameError',
+        error: 'passwordError',
       },
       {
         label: 'Подтвердите пароль',
         type: 'password',
         model: 'confirmPassword',
-        error: 'nameError',
+        error: 'confirmPasswordError',
       },
     ],
     buttons: [
@@ -69,7 +69,7 @@ export const formConfigurations: Record<FormType, FormConfig> = {
         label: 'Email',
         type: 'email',
         model: 'email',
-        error: 'nameError',
+        error: 'emailError',
       },
     ],
     buttons: [
