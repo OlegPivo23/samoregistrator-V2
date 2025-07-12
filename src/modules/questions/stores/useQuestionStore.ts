@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
-import { fetchQuestionDetailsService, getQuestionsService } from '../services/questionsServices';
 import type { AxiosResponse } from 'axios';
+import questionsServices from '../services/questionsServices';
 
 // ===== Типы =====
 
@@ -56,7 +56,8 @@ export const useQuestionStore = defineStore('questionStore', {
       this.error = null;
 
       try {
-        const res = await getQuestionsService();
+        const res = await questionsServices.getQuestionsService();
+
         if (res && res.data) {
           this.questions = res.data;
           this.cashedQuestions = [...res.data];
@@ -74,7 +75,8 @@ export const useQuestionStore = defineStore('questionStore', {
       this.error = null;
 
       try {
-        const res: AxiosResponse | undefined = await fetchQuestionDetailsService(questionId);
+        const res: AxiosResponse | undefined =
+          await questionsServices.fetchQuestionDetailsService(questionId);
 
         if (res && res.data) {
           this.question = res.data;

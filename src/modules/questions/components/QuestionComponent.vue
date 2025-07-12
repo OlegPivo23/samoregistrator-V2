@@ -8,7 +8,7 @@ defineProps<{
 
 <template>
   <div class="flex flex-col gap-4">
-    <!-- <router-link v-for="question in questions" :key="question.id" :to="`/question/${question.id}`">
+    <router-link v-for="question in questions" :key="question.id" :to="`/question/${question.id}`">
       <div
         class="w-full bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:shadow-2xl"
       >
@@ -21,7 +21,6 @@ defineProps<{
           </p>
         </div>
       </div>
-    </router-link> -->
-    awdadawdaw
+    </router-link>
   </div>
 </template>

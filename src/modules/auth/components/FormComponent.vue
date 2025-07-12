@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { useForm } from 'src/composables/useForm';
+import { useAuthStore } from '../stores/useAuthStore';
+
+const authStore = useAuthStore();
 
 const {
   formFields,
@@ -48,6 +51,7 @@ const {
             :label="submitButtonLabel"
             color="primary"
             class="w-full"
+            :loading="authStore.isLoading"
           />
         </div>
       </form>
