@@ -1,7 +1,13 @@
-export interface IAuthInterface {
-  name: string;
+export interface BaseAuth {
+  email: string;
   password: string;
+}
+export interface AuthWithConfirm extends BaseAuth {
   confirmPassword: string;
+  email: string;
+}
+
+export interface AuthRecovery {
   email: string;
 }
 

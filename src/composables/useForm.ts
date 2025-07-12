@@ -1,9 +1,10 @@
-// src/composables/useForm.ts
-
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { formConfigurations } from 'src/configs/formConfig';
 import { useQuasar } from 'quasar';
+import { useAuthStore } from 'src/modules/auth/stores/useAuthStore';
+
+const authStore = useAuthStore();
 
 // Типы для данных формы
 export interface IAuthInterface {
@@ -60,7 +61,7 @@ export interface FormConfig {
   buttons: FormButtonConfig[];
 }
 
-export const useForm = (initialForm: FormType = 'login') => {
+export function useForm(initialForm: FormType = 'login') {
   const router = useRouter();
   const $q = useQuasar();
 
@@ -90,7 +91,7 @@ export const useForm = (initialForm: FormType = 'login') => {
     return formConfigurations[activeForm.value];
   });
 
-  const validateField = (field: keyof IAuthInterface) => {
+  function validateField(field: keyof IAuthInterface) {
     switch (field) {
       case 'name':
         errors.value.nameError =
@@ -116,12 +117,12 @@ export const useForm = (initialForm: FormType = 'login') => {
           formFields.value.email.length < 5 ? 'Email должен быть не менее 5 символов' : '';
         break;
     }
-  };
+  }
 
-  const handleBlur = (field: keyof IAuthInterface) => {
+  function handleBlur(field: keyof IAuthInterface) {
     touched.value[field] = true;
     validateField(field);
-  };
+  }
 
   const isValid = computed(() => {
     if (activeForm.value === 'login') {
@@ -158,19 +159,27 @@ export const useForm = (initialForm: FormType = 'login') => {
     return 'Восстановить пароль';
   });
 
-  const handleSubmit = async () => {
+  async function handleSubmit() {
     if (!isValid.value) {
-      alert('Пожалуйста, исправьте ошибки перед отправкой формы');
       return;
     }
 
     if (activeForm.value === 'login') {
-      $q.notify({
-        message: 'Вы удачно вошли в систему!',
-        type: 'positive',
-        position: 'bottom-right',
-      });
-      await router.push('/cabinet');
+      const success = await authStore.login(formFields.value.name, formFields.value.password);
+      if (success) {
+        $q.notify({
+          message: 'Вы удачно вошли в систему!',
+          type: 'positive',
+          position: 'bottom-right',
+        });
+        await router.push('/cabinet');
+      } else {
+        $q.notify({
+          message: 'Ошибка авторизации! Неверный логин и/ или пароль',
+          type: 'negative',
+          position: 'bottom-right',
+        });
+      }
     } else if (activeForm.value === 'register') {
       $q.notify({
         message: 'Вы успешно зарегестрировались!',
@@ -185,11 +194,11 @@ export const useForm = (initialForm: FormType = 'login') => {
         position: 'bottom-right',
       });
     }
-  };
+  }
 
-  const switchForm = (formName: FormType) => {
+  function switchForm(formName: FormType) {
     activeForm.value = formName;
-  };
+  }
 
   return {
     activeForm,
@@ -204,4 +213,4 @@ export const useForm = (initialForm: FormType = 'login') => {
     handleBlur,
     touched,
   };
-};
+}

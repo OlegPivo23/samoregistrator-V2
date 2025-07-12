@@ -4,6 +4,7 @@ import { useQuestionStore } from '../stores/useQuestionStore';
 import { computed, onMounted } from 'vue';
 import { QSpinnerDots } from 'quasar';
 import QuestionComponent from '../components/QuestionComponent.vue';
+import NoDataComponent from 'src/components/no-data/NoDataComponent.vue';
 
 const questionsStore = useQuestionStore();
 
@@ -20,8 +21,14 @@ onMounted(async () => {
 
 <template>
   <MainLayout>
-    <div class="flex flex-col gap-4 p-6">
+    <div class="flex flex-col gap-4 p-6 max-w-[1400px] mx-auto">
       <q-spinner-dots v-if="questionsStore.loading" color="primary" size="50px" />
+      <div v-else-if="!questions.length">
+        <NoDataComponent
+          title="Пока что тут пусто :("
+          description="Совсем скоро опросники появятся"
+        />
+      </div>
       <QuestionComponent v-else :questions="questions" />
     </div>
   </MainLayout>
