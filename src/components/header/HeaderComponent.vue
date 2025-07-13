@@ -11,11 +11,18 @@ const { isMenuOpen, closeMenu, toggleMenu } = useMenuVisible();
       </div>
 
       <nav class="desctop md:flex">
-        <RouterLink to="/cabinet" class="text-gray-700 hover:text-blue-500 transition">
+        <RouterLink id="cabinet" to="/cabinet" class="text-gray-700 hover:text-blue-500 transition">
           Личный кабинет
         </RouterLink>
-        <RouterLink to="/questions" class="text-gray-700 hover:text-blue-500 transition">
+        <RouterLink
+          id="questions"
+          to="/questions"
+          class="text-gray-700 hover:text-blue-500 transition"
+        >
           Опросники
+        </RouterLink>
+        <RouterLink id="steps" to="/steps" class="text-gray-700 hover:text-blue-500 transition">
+          Шаги
         </RouterLink>
       </nav>
 

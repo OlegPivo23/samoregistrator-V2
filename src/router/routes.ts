@@ -19,6 +19,22 @@ const routes: RouteRecordRaw[] = [
     props: true,
   },
   {
+    path: '/steps',
+    component: () => import('src/modules/steps/pages/StepsPage.vue'),
+  },
+  {
+    path: '/steps/:id',
+    component: () => import('src/modules/steps/pages/StepPage.vue'),
+    props: true,
+  },
+  {
+    path: '/card/:id',
+    name: 'card',
+    component: () => import('src/modules/card/pages/CardPage.vue'),
+    props: true,
+  },
+
+  {
     path: '/:catchAll(.*)*',
     component: () => import('src/modules/not-found/pages/NotFoundPage.vue'),
   },
