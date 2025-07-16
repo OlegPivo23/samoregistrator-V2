@@ -21,7 +21,7 @@ onMounted(async () => {
 
 <template>
   <MainLayout>
-    <div class="flex flex-col gap-4 p-6 max-w-[1400px] mx-auto">
+    <div class="flex flex-col gap-4 p-6 max-w-[1920px] px-4 mx-auto">
       <q-spinner-dots v-if="questionsStore.loading" color="primary" size="50px" />
       <div v-else-if="!questions.length">
         <NoDataComponent

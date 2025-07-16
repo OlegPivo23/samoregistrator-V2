@@ -21,12 +21,40 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/steps',
     component: () => import('src/modules/steps/pages/StepsPage.vue'),
+    children: [
+      {
+        path: 'step-1',
+        name: 'Step1',
+        component: () => import('../modules/steps/components/StepOneComponent.vue'),
+      },
+      {
+        path: 'step-2',
+        name: 'Step2',
+        component: () => import('../modules/steps/components/StepTwoComponent.vue'),
+      },
+      {
+        path: 'step-3',
+        name: 'Step3',
+        component: () => import('../modules/steps/components/StepThreeComponent.vue'),
+      },
+      {
+        path: 'step-4',
+        name: 'Step4',
+        component: () => import('../modules/steps/components/StepFourComponent.vue'),
+      },
+      {
+        path: 'step-5',
+        name: 'Step5',
+        component: () => import('../modules/steps/components/StepFiveComponent.vue'),
+      },
+      {
+        path: 'step-6',
+        name: 'Step6',
+        component: () => import('../modules/steps/components/StepSixComponent.vue'),
+      },
+    ],
   },
-  {
-    path: '/steps/:id',
-    component: () => import('src/modules/steps/pages/StepPage.vue'),
-    props: true,
-  },
+
   {
     path: '/card/:id',
     name: 'card',
