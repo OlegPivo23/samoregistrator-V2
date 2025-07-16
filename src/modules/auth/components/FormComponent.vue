@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { useForm } from 'src/composables/useForm';
 import { useAuthStore } from '../stores/useAuthStore';
+import { useFormStore } from '../../../stores/useFormStore';
 
 const authStore = useAuthStore();
+const formStore = useFormStore();
 
 const {
   formFields,
@@ -11,7 +13,6 @@ const {
   formTitle,
   submitButtonLabel,
   isValid,
-  touched,
   handleSubmit,
   switchForm,
   handleBlur,
@@ -37,23 +38,20 @@ const {
             :id="field.model"
             class="w-full"
             @blur="handleBlur(field.model)"
-            :error="touched[field.model] && !!errors[field.error]"
+            :error="formStore.touched[field.model]"
             :error-message="errors[field.error]"
             :label="field.label"
             outlined
           />
         </div>
-
-        <div>
-          <q-btn
-            :disabled="!isValid"
-            type="submit"
-            :label="submitButtonLabel"
-            color="primary"
-            class="w-full"
-            :loading="authStore.isLoading"
-          />
-        </div>
+        <q-btn
+          :disabled="!isValid"
+          type="submit"
+          :label="submitButtonLabel"
+          color="primary"
+          class="w-full"
+          :loading="authStore.isLoading"
+        />
       </form>
 
       <div

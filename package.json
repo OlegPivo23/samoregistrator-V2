@@ -9,7 +9,7 @@
   "scripts": {
     "lint": "eslint -c ./eslint.config.js \"./src*/**/*.{ts,js,cjs,mjs,vue}\"",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
-    "test": "echo \"No test specified\" && exit 0",
+    "test": "vitest",
     "dev": "quasar dev",
     "build": "quasar build",
     "postinstall": "quasar prepare"
@@ -42,6 +42,7 @@
     "tailwindcss": "^4.1.11",
     "typescript": "~5.5.3",
     "vite-plugin-checker": "^0.9.0",
+    "vitest": "^3.2.4",
     "vue-tsc": "^2.0.29"
   },
   "engines": {

@@ -1,4 +1,4 @@
-import type { FormConfig } from 'src/composables/useForm';
+import type { FormConfig } from 'src/types';
 import type { FormType } from 'src/modules/auth/types/authTypes';
 
 export const formConfigurations: Record<FormType, FormConfig> = {
